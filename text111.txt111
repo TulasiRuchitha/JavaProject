@@ -1,0 +1,74 @@
+create table students(emp_id,emp_name,job_name,manager_id,hire-date,salary,commision,dep_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',emp_name,job_name,manager_id,hire-date,salary,commision,dep_id)' at line 1
+mysql> create table employee(emp_id,emp_name,job_name,manager_id,hire-date,salary,commision,dep_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',emp_name,job_name,manager_id,hire-date,salary,commision,dep_id)' at line 1
+mysql> create table employee(emp_id int,emp_name varchar(23),job_name varchar(22),manager_id int,hire-date date,salary double,commision double,dep_idint);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-date date,salary double,commision double,dep_idint)' at line 1
+mysql> create table employee(emp_id int,emp_name varchar(23),job_name varchar(22),manager_id int,hire-date date,salary double,commision double,dep_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-date date,salary double,commision double,dep_id int)' at line 1
+mysql> create table employee(emp_id int,emp_name varchar(23),job_name varchar(22),manager_id int,hire_date date,salary double,commision double,dep_id int);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(68319,KAYLING,PRESIDENT,NULL,1991-11-18,6000.00,NULL,1001);
+ERROR 1054 (42S22): Unknown column 'KAYLING' in 'field list'
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(68319,"KAYLING","PRESIDENT",NULL,1991-11-18,6000.00,NULL,1001);
+ERROR 1292 (22007): Incorrect date value: '1962' for column 'hire_date' at row 1
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(68319,"KAYLING","PRESIDENT",NULL,"1991-11-18",6000.00,NULL,1001);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(66928"BLAZE","MANAGER",68319,"1991-05-01",2750.00,NULL,1001);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"BLAZE","MANAGER",68319,"1991-05-01",2750.00,NULL,1001)' at line 1
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(66928,"BLAZE","MANAGER",68319,"1991-05-01",2750.00,NULL,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(67832,"CLARE","MANAGER",68319,"1991-06-09",2550.00,NULL,1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(67832,"JONAS","MANAGER",68319,"1991-04-02",2957.00,NULL,2001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(67858,"SCARLET","ANALYST",65646,"1997-04-19",3100.00,NULL,2001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee(emp_id,emp_name,job_name,manager_id,hire_date,salary,commision,dep_id) values(69062,"FRANK","ANALYST",65646,"1991-12-03",3100.00,NULL,2001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> update employee set dep_id=3001 where id=66928;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> update employee set dep_id=3001 where emp_id=66928;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commision | dep_id |
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |      NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |      NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |      NULL |   1001 |
+|  67832 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |      NULL |   2001 |
+|  67858 | SCARLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |      NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |      NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where emp_name like '% %';
+Empty set (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary | commision | dep_id |
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+|  68319 | KAYLING  | PRESIDENT |       NULL | 1991-11-18 |   6000 |      NULL |   1001 |
+|  66928 | BLAZE    | MANAGER   |      68319 | 1991-05-01 |   2750 |      NULL |   3001 |
+|  67832 | CLARE    | MANAGER   |      68319 | 1991-06-09 |   2550 |      NULL |   1001 |
+|  67832 | JONAS    | MANAGER   |      68319 | 1991-04-02 |   2957 |      NULL |   2001 |
+|  67858 | SCARLET  | ANALYST   |      65646 | 1997-04-19 |   3100 |      NULL |   2001 |
+|  69062 | FRANK    | ANALYST   |      65646 | 1991-12-03 |   3100 |      NULL |   2001 |
++--------+----------+-----------+------------+------------+--------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update employee set manager_id='% %' where emp_id=68319;
+ERROR 1366 (HY000): Incorrect integer value: '% %' for column 'manager_id' at row 1
+mysql> update employee set manager_id=% % where emp_id=68319;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '% % where emp_id=68319' at line 1
